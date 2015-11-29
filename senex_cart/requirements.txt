@@ -1,1 +1,2 @@
+Cartridge==0.10.0
 Mezzanine==4.0.1
