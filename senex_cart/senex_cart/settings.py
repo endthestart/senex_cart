@@ -8,17 +8,10 @@ from django.utils.translation import ugettext_lazy as _
 # CARTRIDGE SETTINGS #
 ######################
 
-# The following settings are already defined in cartridge.shop.defaults
-# with default values, but are common enough to be put here, commented
-# out, for conveniently overriding. Please consult the settings
-# documentation for a full list of settings Cartridge implements:
-# http://cartridge.jupo.org/configuration.html#default-settings
-
-# Sequence of available credit card types for payment.
-# SHOP_CARD_TYPES = ("Mastercard", "Visa", "Diners", "Amex")
+SHOP_CARD_TYPES = ("Mastercard", "Visa", "Amex")
 
 # Setting to turn on featured images for shop categories. Defaults to False.
-# SHOP_CATEGORY_USE_FEATURED_IMAGE = True
+SHOP_CATEGORY_USE_FEATURED_IMAGE = True
 
 # Set an alternative OrderForm class for the checkout process.
 # SHOP_CHECKOUT_FORM_CLASS = 'cartridge.shop.forms.OrderForm'
@@ -34,7 +27,7 @@ from django.utils.translation import ugettext_lazy as _
 # Controls the formatting of monetary values accord to the locale
 # module in the python standard library. If an empty string is
 # used, will fall back to the system's locale.
-# SHOP_CURRENCY_LOCALE = ""
+SHOP_CURRENCY_LOCALE = "en_US.UTF-8"
 
 # Dotted package path and name of the function that
 # is called on submit of the billing/shipping checkout step. This
