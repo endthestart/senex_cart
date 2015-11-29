@@ -1,46 +1,77 @@
+from .base import *
 
-DEBUG = True
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+THUMBNAIL_DEBUG = DEBUG
 
-# Make these unique, and don't share it with anybody.
-SECRET_KEY = "f!yzx539yz50eoq)&50n)q$&wmohnez!erqjmz(fx(2!^&9zr^"
-NEVERCACHE_KEY = "z-0pr^8hjc-g0w#9qb+y82f_0q7*!gz5!oylq&wt&iv+6hb$r#"
+ADMINS = (
+    ('Michael Anderson', 'michael@senexcycles.com'),
+)
 
+MANAGERS = ADMINS
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '!e7=(lo95id2%tkk6o8qtz7b4np!5_3ed&v%i(u=dv+l^h_wfg')
+
+########## EMAIL CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/topics/email/
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.senexcycles.com'
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = 'contact@senexcycles.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = 'contact@senexcycles.com'
+SERVER_EMAIL = 'contact@senexcycles.com'
+########## END EMAIL CONFIGURATION
+
+# Database
+DATABASE_PASSWORD = os.environ.get('DATABASE_PASSWORD', '')
 DATABASES = {
     "default": {
-        # Ends with "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
-        "ENGINE": "django.db.backends.sqlite3",
-        # DB name or path to database file if using sqlite3.
-        "NAME": "dev.db",
-        # Not used with sqlite3.
-        "USER": "",
-        # Not used with sqlite3.
-        "PASSWORD": "",
-        # Set to empty string for localhost. Not used with sqlite3.
-        "HOST": "",
-        # Set to empty string for default. Not used with sqlite3.
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "senex_cart",
+        "USER": "senex_cart",
+        "PASSWORD": DATABASE_PASSWORD,
+        "HOST": "localhost",
         "PORT": "",
-    }
+        }
 }
 
-###################
-# DEPLOY SETTINGS #
-###################
+########## CACHE CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#caches
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+########## END CACHE CONFIGURATION
 
-# Domains for public site
-# ALLOWED_HOSTS = [""]
+# See: https://github.com/django-debug-toolbar/django-debug-toolbar#installation
+INTERNAL_IPS = ('127.0.0.1',)
 
-# These settings are used by the default fabfile.py provided.
-# Check fabfile.py for defaults.
+########## ALLOWED HOSTS CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = [
+    '.senexcycles.com',
+    '127.0.0.1',
+]
+########## END ALLOWED HOSTS CONFIGURATION
 
-# FABRIC = {
-#     "DEPLOY_TOOL": "rsync",  # Deploy with "git", "hg", or "rsync"
-#     "SSH_USER": "",  # VPS SSH username
-#     "HOSTS": [""],  # The IP address of your VPS
-#     "DOMAINS": ALLOWED_HOSTS,  # Edit domains in ALLOWED_HOSTS
-#     "REQUIREMENTS_PATH": "requirements.txt",  # Project's pip requirements
-#     "LOCALE": "en_US.UTF-8",  # Should end with ".UTF-8"
-#     "DB_PASS": "",  # Live database password
-#     "ADMIN_PASS": "",  # Live admin user password
-#     "SECRET_KEY": SECRET_KEY,
-#     "NEVERCACHE_KEY": NEVERCACHE_KEY,
-# }
+########## SSL CONFIGURATION
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+########## END SSL CONFIGURATION
+
+########## STRIPE CONFIGURATION
+# See: http://django-stripe-payments.readthedocs.org/en/latest/installation.html
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', 'pk_test_BnKaAmgD81hWGi1F1suzPmX6')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', 'sk_test_x1CjT9YMoj30rlpg50CnmD8A')
+########## END STRIPE
+
+########## NEW RELIC CONFIGURATION
+# See:
+NEW_RELIC = True
+########## END NEW RELIC CONFIGURATION
+
