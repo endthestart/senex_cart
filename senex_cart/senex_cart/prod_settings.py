@@ -43,7 +43,7 @@ INTERNAL_IPS = ('127.0.0.1',)
 ########## ALLOWED HOSTS CONFIGURATION
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.senexcycles.com', '127.0.0.1']
 ########## END ALLOWED HOSTS CONFIGURATION
 
 ########## SSL CONFIGURATION
