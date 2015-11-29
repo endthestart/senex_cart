@@ -1,0 +1,4 @@
+# Local development dependencies go here
+-r test.txt
+bpython==0.14.1
+django-debug-toolbar==1.3.0
